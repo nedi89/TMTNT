@@ -16,7 +16,11 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
-
+    @SequenceGenerator(
+            name = "names_sequence",
+            sequenceName = "names_sequence",
+            allocationSize = 1
+    )
 
     @Id
     @GeneratedValue
