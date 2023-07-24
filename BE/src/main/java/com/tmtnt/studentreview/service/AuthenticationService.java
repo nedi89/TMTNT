@@ -37,7 +37,7 @@ public class AuthenticationService {
         Role userRole = roleRepository.findByAuthority("USER").get();
         Set<Role> authorities = new HashSet<>();
         authorities.add(userRole);
-        return userRepository.save(new User(1L, "", "", username, encodedPassword, authorities));
+        return userRepository.save(new User("", "", username, encodedPassword, authorities));
     }
 
     public LoginResponseDTO loginUser(String email, String password) {
