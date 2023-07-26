@@ -1,6 +1,5 @@
 package com.tmtnt.studentreview.entity;
 
-
 import jakarta.persistence.*;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
@@ -21,7 +20,6 @@ public class User implements UserDetails {
             sequenceName = "names_sequence",
             allocationSize = 1
     )
-
     @Id
     @GeneratedValue
     @Column(name = "user_id")
@@ -56,7 +54,7 @@ public class User implements UserDetails {
         this.authorities = new HashSet<Role>();
     }
 
-    public User( String firstName, String lastname, String email, String password, Set<Role> authorities) {
+    public User(String firstName, String lastname, String email, String password, Set<Role> authorities) {
         super();
 
         this.firstname = firstName;

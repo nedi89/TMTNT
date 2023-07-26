@@ -30,13 +30,11 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 @Configuration
 public class SecurityConfiguration {
-
     private final RSAKeyProperties keys;
 
     public SecurityConfiguration(RSAKeyProperties keys) {
         this.keys = keys;
     }
-
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -60,16 +58,13 @@ public class SecurityConfiguration {
                     auth.requestMatchers("/admin/**").hasRole("ADMIN");
                     auth.requestMatchers("/user/**").hasAnyRole("ADMIN", "USER");
                     auth.anyRequest().authenticated();
-                });
-        http
-                .oauth2ResourceServer()
-                .jwt()
-                .jwtAuthenticationConverter(jwtAuthenticationConverter());
-        http
+                })
+                .oauth2ResourceServer((oauth2) -> {
+                    oauth2.jwt(jwt -> jwtAuthenticationConverter());
+                })
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         return
                 http.build();
-
     }
 
     @Bean
